@@ -1,8 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Landing, Register, Error, ProtectedRoute } from './pages'
-import { AddJob, AllJobs, Profile, Stats, SharedLayout } from './pages/dashboard'
-import React from 'react'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Landing, Register, Error, ProtectedRoute } from './pages';
+import {
+  AddJob,
+  AllJobs,
+  Profile,
+  JobApplication,
+  Stats,
+  SharedLayout,
+} from './pages/dashboard';
+import React from 'react';
+import JobPostings from './pages/dashboard/JobPostings';
 
 function App() {
   return (
@@ -13,20 +20,27 @@ function App() {
         <Link to='/register'> Register</Link>
       </nav> */}
       <Routes>
-        <Route path='/'
+        <Route
+          path="/"
           element={
             <ProtectedRoute>
               <SharedLayout />
             </ProtectedRoute>
-          } >
+          }
+        >
           <Route index element={<Stats />} />
-          <Route path='all-jobs' element={<AllJobs />} />
-          <Route path='add-job' element={<AddJob />} />
-          <Route path='profile' element={<Profile />} />
+          <Route path="all-jobs" element={<AllJobs />} />
+          <Route path="job-postings" element={<JobPostings />} />
+          <Route path="add-job" element={<AddJob />} />
+          <Route path="profile" element={<Profile />} />
+          <Route
+            path="job-postings/:jobId/apply"
+            element={<JobApplication />}
+          />
         </Route>
-        <Route path='/landing' element={<Landing />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/*' element={<Error />} />
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );

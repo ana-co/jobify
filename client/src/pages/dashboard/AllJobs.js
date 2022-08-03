@@ -1,13 +1,15 @@
-import { JobsContainer, SearchContainer } from '../../components'
-import React from 'react'
+import { JobsContainer, SearchContainer } from '../../components';
+import React from 'react';
+
+import { ALL_JOBS_KEY } from '../../context/constants';
 
 const AllJobs = () => {
-    return (
-        <>
-            <SearchContainer></SearchContainer>
-            <JobsContainer></JobsContainer>
-        </>
-    )
-}
+  return (
+    <>
+      <SearchContainer pageKey={ALL_JOBS_KEY} />
+      <JobsContainer></JobsContainer>
+    </>
+  );
+};
 
-export default AllJobs
+export default AllJobs;

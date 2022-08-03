@@ -2,23 +2,23 @@ import { useEffect } from 'react';
 import { useAppContext } from '../context/appContext';
 import Wrapper from '../assets/wrappers/JobsContainer';
 import Loading from './Loading';
-import Job from './Job';
+import JobPosting from './JobPosting';
 import PageBtnContainer from './PageBtnContainer';
 import React from 'react';
-import { ALL_JOBS_KEY } from '../context/constants';
+import { JOB_POSTINGS_KEY } from '../context/constants';
 
-const JobsContainer = () => {
+const JobPostingsContainer = () => {
   const {
-    getAllJobs,
+    getJobPostings,
     jobs,
     isLoading,
     totalJobs,
-    allJobs: { page, search, searchStatus, searchType, sort },
+    jobPostings: { page, search, searchStatus, searchType, sort },
     numOfPages,
   } = useAppContext();
 
   useEffect(() => {
-    getAllJobs();
+    getJobPostings();
     // eslint-disable-next-line
   }, [page, search, searchStatus, searchType, sort]);
 
@@ -41,12 +41,12 @@ const JobsContainer = () => {
       </h5>
       <div className="jobs">
         {jobs.map((job) => {
-          return <Job key={job._id} {...job} />;
+          return <JobPosting key={job._id} {...job} />;
         })}
       </div>
-      {numOfPages > 1 && <PageBtnContainer pageKey={ALL_JOBS_KEY} />}
+      {numOfPages > 1 && <PageBtnContainer pageKey={JOB_POSTINGS_KEY} />}
     </Wrapper>
   );
 };
 
-export default JobsContainer;
+export default JobPostingsContainer;

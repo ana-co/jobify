@@ -6,6 +6,7 @@ const Wrapper = styled.article`
   display: grid;
   grid-template-rows: 1fr auto;
   box-shadow: var(--shadow-2);
+
   header {
     padding: 1rem 1.5rem;
     border-bottom: 1px solid var(--grey-100);
@@ -69,6 +70,7 @@ const Wrapper = styled.article`
       grid-template-columns: 1fr 1fr;
     }
   }
+
   .status {
     border-radius: var(--borderRadius);
     text-transform: capitalize;
@@ -78,34 +80,17 @@ const Wrapper = styled.article`
     height: 30px;
   }
   footer {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
     margin-top: 1rem;
   }
-  .edit-btn,
-  .delete-btn {
-    letter-spacing: var(--letterSpacing);
-    cursor: pointer;
-    height: 30px;
-  }
-  .public-btn {
-    letter-spacing: var(--letterSpacing);
-    cursor: pointer;
-    height: 30px;
-  }
-  .edit-btn {
-    color: var(--green-dark);
-    background: var(--green-light);
-    margin-right: 0.5rem;
-  }
-  .delete-btn {
-    color: var(--red-dark);
-    background: var(--red-light);
-  }
-  .public-btn {
-    /* color: var(--orange-dark);
-    background: var(--orange-light); */
-    color: #d4840c;
-    background: #eed88f;
-    margin-right: 0.5rem;
+  .apply-btn,
+  .apply-btn {
+    /* color: var(--blue-dark);
+    background: var(--blue-light); */
+    color: #0d575a;
+    background: #93dfe9;
   }
   &:hover .actions {
     visibility: visible;

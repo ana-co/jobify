@@ -1,12 +1,11 @@
 import moment from 'moment';
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { useAppContext } from '../context/appContext';
-import Wrapper from '../assets/wrappers/Job';
+import Wrapper from '../assets/wrappers/JobPosting';
 import JobInfo from './JobInfo';
 import React from 'react';
 
-const Job = ({
+const JobPosting = ({
   _id,
   position,
   company,
@@ -14,10 +13,7 @@ const Job = ({
   jobType,
   createdAt,
   status,
-  isPublic,
 }) => {
-  const { setEditJob, deleteJob, makeJobPublic } = useAppContext();
-
   let date = moment(createdAt);
   date = date.format('MMM Do, YYYY');
 
@@ -41,31 +37,9 @@ const Job = ({
 
         <footer>
           <div className="actions">
-            <Link
-              to="/add-job"
-              className="btn edit-btn"
-              onClick={() => setEditJob(_id)}
-            >
-              Edit
+            <Link to={`/job-postings/${_id}/apply`} className="btn apply-btn">
+              Apply
             </Link>
-
-            {!isPublic && (
-              <button
-                type="button"
-                className="btn public-btn"
-                onClick={() => makeJobPublic(_id)}
-              >
-                Make Public
-              </button>
-            )}
-
-            <button
-              type="button"
-              className="btn delete-btn"
-              onClick={() => deleteJob(_id)}
-            >
-              Delete
-            </button>
           </div>
         </footer>
       </div>
@@ -73,4 +47,4 @@ const Job = ({
   );
 };
 
-export default Job;
+export default JobPosting;

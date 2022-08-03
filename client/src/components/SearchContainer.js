@@ -1,90 +1,91 @@
-import Wrapper from '../assets/wrappers/SearchContainer'
-import { FormRow, FormRowSelect } from '.'
-import { useAppContext } from '../context/appContext'
-import React from 'react'
+import Wrapper from '../assets/wrappers/SearchContainer';
+import { FormRow, FormRowSelect } from '.';
+import { useAppContext } from '../context/appContext';
+import React from 'react';
 
-const SearchContainer = () => {
-    const {
-        isLoading,
-        search,
-        searchStatus,
-        searchType,
-        sort,
-        sortOptions,
-        handleChange,
-        clearFilters,
-        jobTypeOptions,
-        statusOptions,
-    } = useAppContext()
+import { JOB_POSTINGS_KEY } from '../context/constants';
 
-    const handleSearch = (e) => {
-        if (isLoading) return
-        handleChange({
-            name: e.target.name,
-            value: e.target.value
-        })
-    }
+const SearchContainer = ({ pageKey }) => {
+  const {
+    isLoading,
+    allJobs,
+    jobPostings,
+    sortOptions,
+    handleSearchChange,
+    clearFilters,
+    jobTypeOptions,
+    statusOptions,
+  } = useAppContext();
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        clearFilters()
-    }
+  const { search, searchStatus, searchType, sort } =
+    pageKey === JOB_POSTINGS_KEY ? jobPostings : allJobs;
 
-    return (
-        <Wrapper>
-            <form className='form'>
-                <h4>search form</h4>
+  const handleSearch = (e) => {
+    if (isLoading) return;
+    handleSearchChange({
+      name: e.target.name,
+      value: e.target.value,
+      pageKey: pageKey,
+    });
+  };
 
-                <div className='form-center'>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    clearFilters({ pageKey });
+  };
 
-                    {/* search position */}
+  return (
+    <Wrapper>
+      <form className="form">
+        <h4>search form</h4>
 
-                    <FormRow
-                        type='text'
-                        name='search'
-                        value={search}
-                        handleChange={handleSearch}
-                    />
+        <div className="form-center">
+          {/* search position */}
 
-                    {/* search by status */}
-                    <FormRowSelect
-                        labelText='status'
-                        name='searchStatus'
-                        value={searchStatus}
-                        handleChange={handleSearch}
-                        list={['all', ...statusOptions]}
-                    />
+          <FormRow
+            type="text"
+            name="search"
+            value={search}
+            handleChange={handleSearch}
+          />
 
-                    {/* search by type */}
-                    <FormRowSelect
-                        labelText='type'
-                        name='searchType'
-                        value={searchType}
-                        handleChange={handleSearch}
-                        list={['all', ...jobTypeOptions]}
-                    />
+          {/* search by status */}
+          <FormRowSelect
+            labelText="status"
+            name="searchStatus"
+            value={searchStatus}
+            handleChange={handleSearch}
+            list={['all', ...statusOptions]}
+          />
 
-                    {/* sort */}
-                    <FormRowSelect
-                        name='sort'
-                        value={sort}
-                        handleChange={handleSearch}
-                        list={sortOptions}
-                    />
+          {/* search by type */}
+          <FormRowSelect
+            labelText="type"
+            name="searchType"
+            value={searchType}
+            handleChange={handleSearch}
+            list={['all', ...jobTypeOptions]}
+          />
 
-                    <button
-                        className='btn btn-block btn-danger'
-                        disabled={isLoading}
-                        onClick={handleSubmit}
-                    >
-                        clear filters
-                    </button>
+          {/* sort */}
+          <FormRowSelect
+            name="sort"
+            value={sort}
+            handleChange={handleSearch}
+            list={sortOptions}
+          />
 
-                </div>
+          <button
+            className="btn btn-block btn-danger"
+            disabled={isLoading}
+            onClick={handleSubmit}
+          >
+            clear filters
+          </button>
+        </div>
+      </form>
+    </Wrapper>
+  );
+};
 
-            </form>
-        </Wrapper>
-    )
-}
-
-export default SearchContainer
+export default SearchContainer;
