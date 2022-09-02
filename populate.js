@@ -8,6 +8,7 @@ import Job from './models/Job.js';
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL);
+    //
     // await Job.updateMany({}, [{ $set: { isPublic: false } }]);
     // await Job.findOneAndUpdate(
     //   { jobLocation: 'Safi' },
